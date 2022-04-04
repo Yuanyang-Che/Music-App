@@ -4,6 +4,7 @@ use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InvoiceController;
 use Illuminate\Support\Facades\URL;
@@ -22,6 +23,13 @@ use App\Models\Album;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+//How to send a raw test email
+Route::get('/mail', function () {
+    Mail::raw("What is your favorite framework?", function ($message) {
+        $message->to('cheyuany@usc.edu')->subject('Hello From Music app');
+    });
+});
 
 
 //Only login users can access the following routes
