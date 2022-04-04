@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\AnnounceNewAlbum;
 use App\Mail\NewAlbum;
 use App\Models\Album;
 use App\Models\Artist;
@@ -57,7 +58,9 @@ class AlbumController extends Controller
 //        ]);
 //        dd($request->input('artist'));
 
-        Mail::to('cheyuany@usc.edu')->send(new NewAlbum($album));
+        //Mail::to('cheyuany@usc.edu')->queue(new NewAlbum($album));
+
+        AnnounceNewAlbum::dispatch($album);
 
         return redirect()
             ->route('album.index')
